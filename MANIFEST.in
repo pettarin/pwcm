@@ -1,0 +1,8 @@
+recursive-include pwcm *
+include CHANGELOG
+include LICENSE
+include README.md
+include README.rst
+include requirements.txt
+include setupmeta.py
+include VERSION
