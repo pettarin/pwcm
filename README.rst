@@ -20,18 +20,18 @@ See also `this article <https://lwn.net/Articles/691932/>`__.
 
 The basic goal consists in testing the possibility of creating a single
 Python wheel supporting CPUs with different features, e.g. SSE3 vs
-SSE4.1/SSE4.1 vs AVX. See this `PyTorch
+SSE4.1/SSE4.2 vs AVX. See this `PyTorch
 issue <https://github.com/pytorch/pytorch/issues/535>`__.
 
 So far, it seems to work as expected:
 
-+-----------+--------------------------------------+----------+---------------+------------+------------+--------------+
-| Machine   | CPU                                  | Flags    | pwcm Output   | Correct?   | Compiler   | Date         |
-+===========+======================================+==========+===============+============+============+==============+
-| laptop1   | Intel(R) Core(TM) i5-6200U           | SSE4.2   | SSE4.2        | Y          | GCC 6      | 2017-02-18   |
-+-----------+--------------------------------------+----------+---------------+------------+------------+--------------+
-| vps1      | AMD Athlon(tm) II X2 240 Processor   | SSE4a    | SSE4a         | Y          | GCC 6      | 2017-02-18   |
-+-----------+--------------------------------------+----------+---------------+------------+------------+--------------+
++-----------+------------------------------+----------+---------------+------------+------------+--------------+
+| Machine   | CPU                          | Flags    | pwcm Output   | Correct?   | Compiler   | Date         |
++===========+==============================+==========+===============+============+============+==============+
+| laptop1   | Intel(R) Core(TM) i5-6200U   | SSE4.2   | SSE4.2        | Y          | GCC 6      | 2017-02-18   |
++-----------+------------------------------+----------+---------------+------------+------------+--------------+
+| vps1      | AMD Athlon(tm) II X2 240     | SSE4a    | SSE4a         | Y          | GCC 6      | 2017-02-18   |
++-----------+------------------------------+----------+---------------+------------+------------+--------------+
 
 Installation from source
 ------------------------
@@ -43,7 +43,6 @@ Installation from source
     $ source bin/activate
     $ git clone https://github.com/pettarin/pwcm
     $ cd pwcm
-    $ make
     $ make test
     $ deactivate
 
@@ -60,9 +59,9 @@ Create a Python wheel
 
     $ # in the pwcm root directory, the one containing README.md
     $ make wheel
-    $ # look inside the dist/ directory
-    $ # the name of the .whl file depends on python version
-    $ ls dist/
+    $ # look inside the dist directory
+    $ # the name of the .whl file depends on your Python version
+    $ ls dist
     pwcm-0.0.1-cp27-cp27mu-linux_x86_64.whl
 
 Installation from a wheel file
@@ -80,7 +79,7 @@ Installation from a wheel file
     $ python -m pwcm
     $ deactivate
 
-Again, it should print something like:
+Again, ``python -m pwcm`` should print something like:
 
 .. code:: plain
 
